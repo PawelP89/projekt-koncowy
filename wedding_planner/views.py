@@ -24,8 +24,8 @@ def registerPage(request):
             form.save()
             return redirect('login')
 
-    ctx = {'form':form}
-    return render(request, 'register.html', ctx)
+    ctx = {'form': form}
+    return render(request, "register.html", ctx)
 
 
 
@@ -33,17 +33,14 @@ class LoginView(View):
     def get(self, request):
         form = LoginForm()
         return render(request, "login.html", {"form": form})
-
     def post(self, request):
         form = LoginForm(request.POST)
         ctx = {"form": form}
-
         if form.is_valid():
             if (form.cleaned_data["login"] == "root" and
                     form.cleaned_data["password"] == "very_secret"):
-                return redirect ('front', {"form": form})
-        return render(request, "login_form.html", ctx)
-
+                return redirect("front")
+        return render(request, "login.html", ctx)
 
 class OptionA(View):
     def get(self, request):
