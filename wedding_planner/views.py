@@ -1,7 +1,8 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views import View
-from .forms import AForm, BForm, CForm, CreateUserForm, LoginForm
+from .forms import AForm, BForm, CForm, CreateUserForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.template.response import TemplateResponse
 
@@ -11,7 +12,9 @@ class HomePage(View):
     def get(self, request):
         return render(request, "homePage.html")
 
-class FrontPage(View):
+class FrontPage(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'front'
     def get(self, request):
         return render(request, "frontPage.html")
 
@@ -29,45 +32,44 @@ def registerPage(request):
 
 
 
-class LoginView(View):
-    def get(self, request):
-        form = LoginForm()
-        return render(request, "login.html", {"form": form})
-    def post(self, request):
-        form = LoginForm(request.POST)
-        ctx = {"form": form}
-        if form.is_valid():
-            if (form.cleaned_data["login"] == "root" and
-                    form.cleaned_data["password"] == "very_secret"):
-                return redirect("front")
-        return render(request, "login.html", ctx)
 
-class OptionA(View):
+class OptionA(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'front'
     def get(self, request):
         form = AForm()
         return render(request, 'optiona.html', {'form': form})
     def post(self, request):
         form = AForm(request.POST)
         if form:
-            return HttpResponseRedirect('/thanks/')
+            return redirect('podsumowanie')
 
-class OptionB(View):
+class OptionB(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'front'
+
     def get(self, request):
         form = BForm()
         return render(request, 'optionb.html', {'form': form})
+
     def post(self, request):
         form = AForm(request.POST)
         if form:
             return HttpResponseRedirect('/thanks/')
 
-class OptionC(View):
+
+class OptionC(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'front'
+
     def get(self, request):
         form = CForm()
         return render(request, 'optionc.html', {'form': form})
+
     def post(self, request):
         form = AForm(request.POST)
-        if form:
-            return HttpResponseRedirect('/thanks/')
+        if form.quantity < 50:
+            return redirect('/thanks/')
 
 class Kontakt(View):
     def get(self, request):
@@ -80,3 +82,7 @@ class Onas(View):
 class Relacje(View):
     def get(self, request):
         return render(request, 'relacje.html')
+
+class Podsumowanie(View):
+    def get(self, request):
+        return render(request, "podsumowanie.html")
