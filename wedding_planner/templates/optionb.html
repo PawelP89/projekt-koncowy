@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h3>ZABAWA DO PÓŁNOCY</h3>
+    <form action="/optionb/" method="post">
+        {% csrf_token %}
+        <p>
+        {{ form }} <br>
+        <input type="submit" value="Zapisz">
+        </p>
+    </form>
+{% endblock %}
