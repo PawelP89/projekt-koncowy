@@ -1,7 +1,8 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>KOLACJA DLA NAJBLIŻSZYCH</h3>
+    <h3>WESELNY KALKULATOR</h3>
+
     <form action="/optiona/" method="post">
         {% csrf_token %}
         <p>Suknia {{ form.wearf }} <br>
@@ -12,6 +13,9 @@
             Ekipa filmowa {{ form.movie }} <br>
             Fotograf {{ form.photo }} <br>
         <input type="submit" value="Zapisz">
+            <br>
+            <br>
+<p><a href="/logout/" class="btn btn-primary">Wyloguj się</a></p>
         </p>
     </form>
 {% endblock %}

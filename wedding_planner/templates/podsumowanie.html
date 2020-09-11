@@ -1,6 +1,25 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <h3>Podsumowanie</h3>
 
+{% for lista in lista %}
+    <h3>Podsumowanie wydatków:</h3>
+
+<p><strong>Suknia:</strong>{{ lista.wearf }} zł;</p>
+<p><strong>Garnitur:</strong>{{ lista.wearm }} zł;</p>
+<p><strong>Liczba gości:</strong> {{ lista.quantity }}zł;</p>
+<p><strong>Cena za talerzyk:</strong> {{ lista.plate_price}}zł;</p>
+<p><strong>Dj/zespół:</strong> {{ lista.music }}zł;</p>
+<p><strong>Ekipa filmowa:</strong> {{ lista.movie }}zł;</p>
+<p><strong>Fotograf:</strong> {{ lista.photo }} zł;</p>
+<p><strong>CAŁKOWITY KOSZT TO </strong> {{ wynik }} <strong> ZŁ!!!</strong></p>
+
+    <br>
+    <p>
+
+        {% endfor %}
+
+    <a href="/optiona/" class="btn btn-primary">Wróć do kalkulatora</a>
+    <a href="/profile/" class="btn btn-primary">Przejdź na swój profil</a>
+</p>
 {% endblock %}

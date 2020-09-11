@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Witaj {{ user.username }}!</h1>
+   {% for user.username in lista %}
+
+        <div>
+            <h2>Twój zapisany plan:</h2>
+            <p> Suknia: {{ lista.wearf }}</p>
+             <p> Garnitur: {{ lista.wearm }}</p>
+             <p> Liczba gości: {{ lista.quantity }}</p>
+             <p> Cena za talerzyk: {{ lista.plate_price }}</p>
+             <p> Dj/zespół: {{ lista.music}}</p>
+             <p> Ekipa filmowa: {{ lista.movie }}</p>
+             <p> Fotograf: {{ lista.photo }}</p>
+        </div>
+
+    {% endfor %}
+        <p><a href="/optiona/" class="btn btn-success">Utwórz plan</a></p>
+        <p><a href="/logout/" class="btn btn-primary">Wyloguj się</a></p>
+
+{% endblock %}
