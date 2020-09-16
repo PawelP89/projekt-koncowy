@@ -41,9 +41,17 @@ def registerPage(request):
     return render(request, "register.html", {'form': form})
 
 
-@login_required
-def profile(request):
-    return render(request, 'profile.html')
+class Profile(LoginRequiredMixin, View):
+    login_url = '/login/'
+    redirect_field_name = 'front'
+
+    def get(self, request):
+        latest_entry = Lista.objects.filter(user_id=request.user.id).order_by('-id')[:3]
+        ctx = {
+            "lista": latest_entry
+        }
+        return render(request, "profile.html", ctx)
+
 
 
 class OptionA(LoginRequiredMixin, View):
@@ -60,7 +68,9 @@ class OptionA(LoginRequiredMixin, View):
         ctx = {"form": form}
 
         if form.is_valid():
-            form.save()
+            my_list = form.save(commit=False)
+            my_list.user = request.user
+            my_list.save()
             return redirect('podsumowanie')
         return render(request, "optiona", ctx)
 
@@ -83,7 +93,7 @@ class Podsumowanie(LoginRequiredMixin, View):
     redirect_field_name = 'front'
 
     def get(self, request):
-        lista = Lista.objects.all().order_by('-id')
+        lista = Lista.objects.order_by('-id').first()
         ctx = {
             "lista": lista
         }

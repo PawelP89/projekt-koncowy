@@ -18,5 +18,4 @@ class LoginForm(forms.Form):
 class ListaForm(forms.ModelForm):
     class Meta:
         model = Lista
-        fields = '__all__'
-
+        fields = ['wearf', 'wearm', 'quantity', 'plate_price', 'music', 'movie', 'photo']

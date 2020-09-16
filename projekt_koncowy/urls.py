@@ -17,12 +17,12 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from wedding_planner.views import HomePage, FrontPage, OptionA, \
-    Kontakt, Onas, Relacje, registerPage, Podsumowanie, profile
+    Kontakt, Onas, Relacje, registerPage, Podsumowanie, Profile
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', registerPage),
-    path('profile/', profile, name='profile'),
+    path('profile/', Profile.as_view(), name='profile'),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('', HomePage.as_view(), name='home'),
