@@ -13,7 +13,7 @@
              <p> Dj/zespół: {{ l.music }}</p>
              <p> Ekipa filmowa: {{ l.movie }}</p>
              <p> Fotograf: {{ l.photo }}</p>
-             <p><strong>CAŁKOWITY KOSZT TO {{ l.total }} ZŁ!!!</strong></p>
+             <p><strong>CAŁKOWITY KOSZT TO {{ l.total|floatformat:2 }} ZŁ!!!</strong></p>
         </div>
     <br>
     {% endfor %}

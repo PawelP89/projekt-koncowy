@@ -93,7 +93,7 @@ class Podsumowanie(LoginRequiredMixin, View):
     redirect_field_name = 'front'
 
     def get(self, request):
-        lista = Lista.objects.order_by('-id').first()
+        lista = Lista.objects.filter(user_id=request.user.id).order_by('-id').first()
         ctx = {
             "lista": lista
         }

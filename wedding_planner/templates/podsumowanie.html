@@ -12,7 +12,7 @@
 <p><strong>Dj/zespół:</strong> {{ lista.music }} zł;</p>
 <p><strong>Ekipa filmowa:</strong> {{ lista.movie }} zł;</p>
 <p><strong>Fotograf:</strong> {{ lista.photo }} zł;</p>
-<p><strong>CAŁKOWITY KOSZT TO </strong> {{ lista.total }} <strong> ZŁ!!!</strong></p>
+<p><strong>CAŁKOWITY KOSZT TO </strong> {{ lista.total|floatformat:2 }} <strong> ZŁ!!!</strong></p>
 
     <br>
     <p>
